@@ -34,5 +34,35 @@ class Grammar:
     
     def toAutomaton(self):
         from automaton import FiniteAutomaton
+        states = set(self.VN)
+        final_state = "X"
+        states.add(final_state)
         
+        alphabet = set(self.VT)
+        transitions = {}
         
+        for left, rights in self.P.items():
+            for right in rights:
+                symbol = right[0]
+                # A -> aB
+                if len(right)==2:
+                    next_state = right[1]
+                # A -> a
+                elif len(right) ==1:
+                    next_state = final_state
+                else:
+                    continue
+                
+                key = (left, symbol)
+                if key not in transitions:
+                    transitions[key] = set()
+
+                transitions[key].add(next_state)
+        
+        return FiniteAutomaton(
+            states=states,
+            alphabet=alphabet,
+            transitions=transitions,
+            start_state=self.S,
+            final_states={final_state}
+        )
