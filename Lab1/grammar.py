@@ -5,32 +5,26 @@ class Grammar:
         self.VT = VT
         self.P = P
         self.S = S
-    def generateWords (self , max):
+    def generateWords(self, max_steps):
         current = self.S
         steps = 0
 
-        pos = -1
-        symbol = None
-
-        while steps < max:
+        while steps < max_steps:
+            pos = -1
+            
             for i, ch in enumerate(current):
                 if ch in self.VN:
-                    pos = i #looks for the nonterminal symbol and its pos
-                    symbol = ch
+                    pos = i
                     break
-
-            if pos == -1:
-                break
             
-        production = random.choice(self.P[symbol])
-        current = current[:pos] + production + current[pos+1:] #replaces the nonterminal sign to the production
+            if pos == -1:  
+                return current
+            
+            production = random.choice(self.P[current[pos]])
+            current = current[:pos] + production + current[pos+1:]#combines the produced sequences
+            steps += 1
         
-        steps +=1 
-        
-        for ch in current:
-           if any(ch in self.VN):
-               return None
-        return current
+        return None  
     
     def toAutomaton(self):
         from automaton import FiniteAutomaton
@@ -60,9 +54,9 @@ class Grammar:
                 transitions[key].add(next_state)
         
         return FiniteAutomaton(
-            states=states,
             alphabet=alphabet,
             transitions=transitions,
-            start_state=self.S,
-            final_states={final_state}
+            states=states,
+            start=self.S,
+            final={final_state}
         )

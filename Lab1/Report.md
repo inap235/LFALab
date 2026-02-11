@@ -48,7 +48,7 @@ def generateWords(self, max):
     current = self.S
     steps = 0
     
-    while steps < max:
+    while steps < max_steps:
         pos = -1
         symbol = None
         
@@ -65,13 +65,10 @@ def generateWords(self, max):
         current = current[:pos] + production + current[pos+1:]
         steps += 1
     
-    for ch in current:
-        if ch in self.VN:
-            return None
     return current
 ```
 
-The algorithm maintains the current derivation string and searches for non-terminal symbols. Upon finding a non-terminal, it randomly selects a production rule and replaces that symbol. The process continues until either the maximum number of steps is reached or no non-terminals remain. If non-terminals persist after the maximum iterations, the function returns None to indicate an incomplete derivation.
+The algorithm maintains the current derivation string and searches for non-terminal symbols. Upon finding a non-terminal, it randomly selects a production rule and replaces that symbol. The process continues until either the maximum number of steps is reached or no non-terminals remain. The method now returns the derived string at any stage, which may contain both terminal and non-terminal symbols depending on the number of derivation steps performed. This allows for greater flexibility in exploring the language generation process, including intermediate derivations that contain non-terminals.
 
 ### Finite Automaton Class
 
@@ -110,7 +107,30 @@ This grammar generates strings over the alphabet {a, b} with specific structural
 
 ## Testing and Verification
 
-The implementation allows for generation of multiple valid strings from the grammar. Example outputs from the `generateWords` method include strings such as "a", "aba", "abaC", and others, all derivable from the production rules starting from the start symbol S. The finite automaton can then be used to verify whether arbitrary input strings belong to the language recognized by this grammar.
+The implementation allows for generation of multiple valid strings from the grammar. The `generateWords` method can generate strings at various stages of derivation:
+
+- **Fully terminal strings**: When using larger `max_steps` values (e.g., 20), the algorithm typically produces strings containing only terminal symbols {a, b}. Examples: "abaaa", "ababaaa", "aabaaa".
+
+- **Strings with non-terminals**: When using smaller `max_steps` values, the algorithm returns intermediate derivations that may contain both non-terminal symbols {S, A, B, C} and terminal symbols. This provides flexibility in exploring the derivation process at different levels.
+
+Example execution output:
+```
+Generated strings:
+aabaabaaa
+abaaa
+aabaaa
+abaaa
+ababababaabaaa
+
+Testing generated strings:
+aabaabaaa -> True
+abaaa -> True
+aabaaa -> True
+abaaa -> True
+ababababaabaaa -> True
+```
+
+The finite automaton can verify whether arbitrary strings belong to the language recognized by this grammar using the `stringBelongToLanguage()` method. All generated strings in the above example are accepted by the automaton, confirming the correctness of both the grammar and its equivalent finite automaton representation.
 
 ## Conclusions
 

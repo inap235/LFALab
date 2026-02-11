@@ -6,7 +6,7 @@ class FiniteAutomaton:
         self.start = start
         self.final = final
         
-    def belong(self , inputString):
+    def stringBelongToLanguage(self, inputString):
         current_states = {self.start}
         
         for symbol in inputString:
@@ -15,12 +15,13 @@ class FiniteAutomaton:
             for state in current_states:
                 key = (state, symbol)
                 if key in self.transitions:
-                    next_state |= self.transitions[key]
+                    next_states |= self.transitions[key]
                     
             current_states = next_states
             
-            if not current_states: return False
+            if not current_states:
+                return False
             
-        return (len(current_states)& self.final) > 0
+        return bool(current_states & self.final)
                 
         
