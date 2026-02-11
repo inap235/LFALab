@@ -1,7 +1,7 @@
 # Laboratory Work 1: Introduction to Formal Languages and Finite Automata
 
 ### Course: Formal Languages & Finite Automata
-### Author: Cretu Dumitru
+### Author: Pancenco Ina, FAF-242
 
 ----
 
@@ -136,10 +136,6 @@ The finite automaton can verify whether arbitrary strings belong to the language
 
 This laboratory work demonstrates the practical implementation of fundamental formal language concepts. The separation between the Grammar and FiniteAutomaton classes reflects the theoretical relationship between these two models of computation. The Grammar class provides a generative approach (creating valid strings), while the FiniteAutomaton class provides a recognition approach (verifying string membership). Through this implementation, the equivalence between regular grammars and finite automata becomes tangible and testable.
 
-The implementation is clean and modular, making it easy to extend with additional functionality such as input validation, epsilon-free grammar conversion, or DFA minimization. The Python language choice proved practical for implementing these concepts without unnecessary complexity in project setup or infrastructure.
+The implementation is clean and modular, making it easy to extend with additional functionality such as input validation, epsilon-free grammar conversion, or DFA minimization.
 
-## References
 
-- Drumea, V., and Cojuhari, I. "Formal Languages and Finite Automata." Course Materials.
-- Hopcroft, J. E., Motwani, R., and Ullman, J. D. "Introduction to Automata Theory, Languages, and Computation." Pearson, 2006.
-- Dragon Book concepts on regular grammars and their relationship to finite automata.

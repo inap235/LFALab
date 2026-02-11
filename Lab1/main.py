@@ -22,12 +22,11 @@ def main():
     automaton = grammar.toAutomaton()
 
     print("\nTesting generated strings:")
-# Test with strings NOT in the language
     test_strings = [
-    "b",        # Starts with b (grammar requires 'a')
-    "ab",       # Invalid pattern
-    "ba",       # Invalid pattern
-    "aababaaa"  # Valid (already generated)
+    "b",        
+    "ab",       
+    "ba",       
+    "aababaaa"  
 ]
 
     for w in test_strings:
