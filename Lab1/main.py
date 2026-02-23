@@ -31,9 +31,9 @@ def main():
 
     for w in test_strings:
         print(w, "->", automaton.stringBelongToLanguage(w))
-    """for w in generated:
+    for w in generated:
         print(w, "->", automaton.stringBelongToLanguage(w))
-"""
+
 
 if __name__ == "__main__":
     main()

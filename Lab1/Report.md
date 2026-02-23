@@ -109,9 +109,9 @@ This grammar generates strings over the alphabet {a, b} with specific structural
 
 The implementation allows for generation of multiple valid strings from the grammar. The `generateWords` method can generate strings at various stages of derivation:
 
-- **Fully terminal strings**: When using larger `max_steps` values (e.g., 20), the algorithm typically produces strings containing only terminal symbols {a, b}. Examples: "abaaa", "ababaaa", "aabaaa".
+**Fully terminal strings**: When using larger `max_steps` values (e.g., 20), the algorithm typically produces strings containing only terminal symbols {a, b}. Examples: "abaaa", "ababaaa", "aabaaa".
 
-- **Strings with non-terminals**: When using smaller `max_steps` values, the algorithm returns intermediate derivations that may contain both non-terminal symbols {S, A, B, C} and terminal symbols. This provides flexibility in exploring the derivation process at different levels.
+
 
 Example execution output:
 ```

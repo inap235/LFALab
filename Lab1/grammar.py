@@ -1,10 +1,10 @@
 import random
 class Grammar:
     def __init__(self, VN, VT, P, S):
-        self.VN = VN
+        self.VN = VN 
         self.VT = VT
-        self.P = P
-        self.S = S
+        self.P = P #productions list
+        self.S = S #start symbol
     def generateWords(self, max_steps):
         current = self.S
         steps = 0
