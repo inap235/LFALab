@@ -68,36 +68,49 @@ class Grammar:
         Type 1  Context-Sensitive
         Type 0 Unrestricted
         """
-        regular = True
+        is_regular = True
         for left, rights in self.P.items():
             if left not in self.VN:
-                regular = False
+                is_regular = False
                 break
 
             for right in rights:
-                # A -> a
-                if len(right) == 1:
-                    if right[0] not in self.VT:
-                        is_regular = False
+                if right == "":
+                    continue
+
+                # Try to match: one terminal followed by an optional non-terminal
+                # Find the terminal prefix (first char(s) that form a terminal)
+                terminal = None
+                for t in sorted(self.VT, key=len, reverse=True):
+                    if right.startswith(t):
+                        terminal = t
                         break
 
-                # A -> aB
-                elif len(right) == 2:
-                    if right[0] not in self.VT or right[1] not in self.VN:
-                        is_regular = False
-                        break
+                if terminal is None:
+                    # right doesn't start with a terminal
+                    is_regular = False
+                    break
+
+                rest = right[len(terminal):]
+
+                if rest == "":
+                    # A -> a  (terminal only)
+                    pass
+                elif rest in self.VN:
+                    # A -> aB (terminal + non-terminal)
+                    pass
                 else:
                     is_regular = False
                     break
 
             if not is_regular:
                 break
+
         if is_regular:
             return "Type 3 – Regular grammar"
 
         #Type 2
         is_cfl = True
-
         for left in self.P.keys():
             if left not in self.VN:
                 is_cfl = False
@@ -106,7 +119,7 @@ class Grammar:
         if is_cfl:
             return "Type 2 – Context-Free grammar"
 
-        # ---------- check Type 1 (context-sensitive) ----------
+        #Type 1
         is_csl = True
 
         for left, rights in self.P.items():
