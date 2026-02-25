@@ -79,7 +79,6 @@ class Grammar:
                     continue
 
                 # Try to match: one terminal followed by an optional non-terminal
-                # Find the terminal prefix (first char(s) that form a terminal)
                 terminal = None
                 for t in sorted(self.VT, key=len, reverse=True):
                     if right.startswith(t):

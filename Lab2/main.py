@@ -1,6 +1,4 @@
 from automaton import FiniteAutomaton
-
-
 def build_variant_nfa():
     Q = {"q0", "q1", "q2", "q3"}
     Sigma = {"a", "b", "c"}
@@ -14,7 +12,6 @@ def build_variant_nfa():
         ("q2", "a"): {"q2"},
         ("q2", "b"): {"q3"},
         ("q3", "a"): {"q3"}
-        # no transitions for 'c' in the variant
     }
 
     return FiniteAutomaton(
@@ -25,9 +22,7 @@ def build_variant_nfa():
         final_states=F
     )
 
-
 def format_transition_display(delta, state_name_func=None):
-    """Format transitions nicely, handling both DFA and NFA."""
     if not delta:
         return []
     
@@ -90,7 +85,7 @@ def main():
                 print(f"Reason: δ({state},{symbol}) = {next_str} — one input leads to multiple states.")
                 break
     
-    # Grammar conversion — show how each transition becomes a production
+    # Grammar conversion
     print("\n" + "="*40)
     print(" 3a. NDFA -> REGULAR GRAMMAR")
     print("="*40)
@@ -113,7 +108,6 @@ def main():
             else:
                 print(f"  {left} -> {r}")
     
-    # DFA conversion
     dfa = nfa.to_dfa()
     
     print("\n" + "="*40)
@@ -125,7 +119,6 @@ def main():
         print(line)
     print(f"Is deterministic: true")
     
-    # Equivalence check with nice table
     tests = [
         ("abb", True),
         ("abba", True),
