@@ -1,5 +1,6 @@
 from enum import Enum
-class TokenType (Enum):
+
+class TokenType(Enum):
     NUMBER = "NUMBER"
     VARIABLE = "VARIABLE"
     FUNCTION = "FUNCTION"
