@@ -1,7 +1,6 @@
 from token_types import TokenType
 from token import Token
 
-
 class Lexer:
     def __init__(self, text):
         self.text = text

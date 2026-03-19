@@ -1,12 +1,8 @@
 from collections import Counter
-
 from lexer import Lexer
-
-
 def tokenize_expression(expression):
     lexer = Lexer(expression)
     return lexer.tokenize()
-
 
 def print_tokens_table(tokens):
     print(f"  {'#':<4} {'Type':<12} {'Value':<20}")
@@ -47,7 +43,7 @@ predefined_cases = [
 for expression, title in predefined_cases:
     demo(expression, title)
 
-custom_expression = input("\nEnter your own physics expression (or press Enter to skip): ").strip()
+custom_expression = input("\nEnter a physics expression: ").strip()
 if custom_expression:
     demo(custom_expression, "Custom Case")
 
